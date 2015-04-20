@@ -19,26 +19,24 @@ namespace OnionWebApiStarterKit.Data
         public SchoolDbContext()
             : base("name=SchoolContext") // use app.config transforms or web.config transforms to change this
         {
-             if (_databaseInitialized)
-             {
-                 return;
-             }
-             lock (Lock)
-             {
-                 if (!_databaseInitialized)
-                 {
-                     // Set the database intializer which is run once during application start
-                     // This seeds the database with admin user credentials and admin role
-                     Database.SetInitializer(new ApplicationDbInitializer());
-                     _databaseInitialized = true;
-                 }
-             }
+            if (_databaseInitialized)
+            {
+                return;
+            }
+            lock (Lock)
+            {
+                if (!_databaseInitialized)
+                {
+                    // Set the database intializer which is run once during application start
+                    // This seeds the database with admin user credentials and admin role
+                    Database.SetInitializer(new ApplicationDbInitializer());
+                    _databaseInitialized = true;
+                }
+            }
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Configurations.Add(new StudentMapping());
             modelBuilder.Configurations.Add(new EnrollmentMapping());
             modelBuilder.Configurations.Add(new CourseMapping());

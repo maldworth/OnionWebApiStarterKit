@@ -45,7 +45,7 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationDbInitializer.cs" />
+    <Compile Include="Impl\ApplicationDbInitializer.cs" />
     <Compile Include="Extensions\DbContextScopeExtensions.cs" />
     <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="IDbContext.cs" />
@@ -54,10 +54,9 @@
     <Compile Include="Mappings\CourseMapping.cs" />
     <Compile Include="Mappings\StudentMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchoolDbContext.cs" />
+    <Compile Include="Impl\SchoolDbContext.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
