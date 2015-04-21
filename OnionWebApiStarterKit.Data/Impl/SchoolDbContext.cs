@@ -13,26 +13,9 @@ namespace OnionWebApiStarterKit.Data
 {
     public class SchoolDbContext : DbContext, ISchoolDbContext
     {
-        private static readonly object Lock = new object();
-        private static bool _databaseInitialized;
-
         public SchoolDbContext()
-            : base("name=SchoolContext") // use app.config transforms or web.config transforms to change this
+            : base("name=SchoolContext") // use app.config transforms or web.config transforms to change this in your UI/Presentation project
         {
-            if (_databaseInitialized)
-            {
-                return;
-            }
-            lock (Lock)
-            {
-                if (!_databaseInitialized)
-                {
-                    // Set the database intializer which is run once during application start
-                    // This seeds the database with admin user credentials and admin role
-                    Database.SetInitializer(new ApplicationDbInitializer());
-                    _databaseInitialized = true;
-                }
-            }
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

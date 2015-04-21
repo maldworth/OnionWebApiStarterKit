@@ -45,7 +45,7 @@
     <Reference Include="System.Data" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Impl\ApplicationDbInitializer.cs" />
+    <Compile Include="Impl\SchoolDbSeed.cs" />
     <Compile Include="Extensions\DbContextScopeExtensions.cs" />
     <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="IDbContext.cs" />

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 
 namespace OnionWebApiStarterKit.Data
 {
-    public class ApplicationDbInitializer : DropCreateDatabaseAlways<SchoolDbContext>
+    public static class SchoolDbSeed
     {
-        protected override void Seed(SchoolDbContext context)
+        public static void Seed(ISchoolDbContext context)
         {
             var students = new List<Student>
             {
@@ -22,7 +22,7 @@ namespace OnionWebApiStarterKit.Data
             };
 
             students.ForEach(s => context.Set<Student>().Add(s));
-            context.SaveChanges();
+            ((DbContext)context).SaveChanges();
             var courses = new List<Course>
             {
             new Course{CourseId=1050,Title="Chemistry",Credits=3,},
@@ -34,7 +34,7 @@ namespace OnionWebApiStarterKit.Data
             new Course{CourseId=2042,Title="Literature",Credits=4,}
             };
             courses.ForEach(s => context.Set<Course>().Add(s));
-            context.SaveChanges();
+            ((DbContext)context).SaveChanges();
             var enrollments = new List<Enrollment>
             {
             new Enrollment{StudentId=1,CourseId=1050,Grade=Grade.A},
@@ -51,7 +51,7 @@ namespace OnionWebApiStarterKit.Data
             new Enrollment{StudentId=7,CourseId=3141,Grade=Grade.A},
             };
             enrollments.ForEach(s => context.Set<Enrollment>().Add(s));
-            context.SaveChanges();
+            ((DbContext)context).SaveChanges();
         }
     }
 }

@@ -153,8 +153,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\DbContextScopeExtensionsConfig.cs" />
+    <Compile Include="App_Start\Config\DbContextScopeExtensionsConfig.cs" />
     <Compile Include="App_Start\AutoMapperModule.cs" />
+    <Compile Include="App_Start\Config\SchoolContextDevelopmentConfiguration.cs" />
     <Compile Include="App_Start\FluentValidationModule.cs" />
     <Compile Include="App_Start\MediatorModule.cs" />
     <Compile Include="App_Start\IocConfig.cs" />
