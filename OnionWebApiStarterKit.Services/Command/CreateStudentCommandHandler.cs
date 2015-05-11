@@ -9,10 +9,11 @@ using System.Collections.Generic;
 using AutoMapper.QueryableExtensions;
 using OnionWebApiStarterKit.Core.Services.Command;
 using OnionWebApiStarterKit.Data;
+using System.Threading.Tasks;
 
 namespace OnionWebApiStarterKit.Services.Command
 {
-    public class CreateStudentCommandHandler : IRequestHandler<CreateStudentCommand, Student>
+    public class CreateStudentCommandHandler : IAsyncRequestHandler<CreateStudentCommand, Student>
     {
         private readonly IDbContextScopeFactory _dbContextScopeFactory;
 
@@ -24,7 +25,7 @@ namespace OnionWebApiStarterKit.Services.Command
             _dbContextScopeFactory = dbContextScopeFactory;
         }
 
-        public Student Handle(CreateStudentCommand command)
+        public async Task<Student> Handle(CreateStudentCommand command)
         {
             using (var dbContextScope = _dbContextScopeFactory.Create())
             {
@@ -41,7 +42,7 @@ namespace OnionWebApiStarterKit.Services.Command
 
                 dbCtx.Students.Add(domainModel);
 
-                dbContextScope.SaveChanges();
+                await dbContextScope.SaveChangesAsync();
 
                 // This student will have the Id field populated.
                 return domainModel;

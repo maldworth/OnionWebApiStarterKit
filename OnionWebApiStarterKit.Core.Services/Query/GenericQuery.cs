@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using OnionWebApiStarterKit.Core.Services.Abstracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,12 @@ using System.Linq.Expressions;
 
 namespace OnionWebApiStarterKit.Core.Services.Query
 {
-    public class GenericQuery<TEntity> : IRequest<IEnumerable<TEntity>>, IFilterQuery<TEntity>, IOrderByQuery<TEntity>, IIncludeQuery<TEntity>, ITakeQuery
+    public class GenericQuery<TEntity>
+        : BaseRequest, IRequest<IEnumerable<TEntity>>,
+        IFilterQuery<TEntity>,
+        IOrderByQuery<TEntity>,
+        IIncludeQuery<TEntity>,
+        ITakeQuery
         where TEntity : class
     {
         public const int PAGE_SIZE_MIN = 1;

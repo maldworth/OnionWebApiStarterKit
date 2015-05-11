@@ -59,8 +59,12 @@ namespace OnionWebApiStarterKit.Bootstrapper
             builder.RegisterGenericDecorator(typeof(AsyncMediatorPipeline<,>), typeof(IAsyncRequestHandler<,>), fromKey: "async-service-handlers", toKey: "async-pipeline-handlers");
 
             // Decorate All Pipelines with our Validator
-            builder.RegisterGenericDecorator(typeof(ValidatorHandler<,>), typeof(IRequestHandler<,>), fromKey: "pipeline-handlers");    // The outermost decorator should not have a toKey
-            builder.RegisterGenericDecorator(typeof(AsyncValidatorHandler<,>), typeof(IAsyncRequestHandler<,>), fromKey: "async-pipeline-handlers");    // The outermost decorator should not have a toKey
+            builder.RegisterGenericDecorator(typeof(ValidatorHandler<,>), typeof(IRequestHandler<,>), fromKey: "pipeline-handlers", toKey: "validator-handlers");
+            builder.RegisterGenericDecorator(typeof(AsyncValidatorHandler<,>), typeof(IAsyncRequestHandler<,>), fromKey: "async-pipeline-handlers", toKey: "async-validator-handlers");
+
+            // Decorate All Validators with our Logging Handler
+            builder.RegisterGenericDecorator(typeof(LoggingHandler<,>), typeof(IRequestHandler<,>), fromKey: "validator-handlers");    // The outermost decorator should not have a toKey
+            builder.RegisterGenericDecorator(typeof(AsyncLoggingHandler<,>), typeof(IAsyncRequestHandler<,>), fromKey: "async-validator-handlers");    // The outermost decorator should not have a toKey
 
             // Special registration of our Automapper Handler
             builder.RegisterGeneric(typeof(AutoMapperQuery<,>)).AsSelf();

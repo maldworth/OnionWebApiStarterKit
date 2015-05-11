@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
@@ -27,7 +28,7 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
         public async System.Threading.Tasks.Task<IEnumerable<Student>> Get()
         {
             // Example of calling the paginated result
-            var pagedStudents = _mediator.Send(new PaginateQuery<Student>(2,3,orderBy: x=>x.OrderBy(c=>c.LastName)));
+            //var pagedStudents = _mediator.Send(new PaginateQuery<Student>(2,3,orderBy: x=>x.OrderBy(c=>c.LastName)));
 
             // Depending on your design decisions, you might want to limit the amount of results that can be queries.
             // We made our services require a "Take" amount. You may not want to adopt this approach.
@@ -50,7 +51,7 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
         // But depending on your implementation, your service might allow more configurations, or it could be an "CreateOrUpdate" service, and so you would want to do some preliminary validation
         // here before calling the service. So really I'm just trying to show all potential ways to use these features. Your project architecture, complexity and code style/conventions might
         // favor one more than the other, but the building blocks are here.
-        public dynamic Post([FromBody]CreateStudentViewModel model)
+        public async Task<dynamic> Post([FromBody]CreateStudentViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -64,7 +65,7 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
                 EnrollmentDate = model.EnrollmentDate
             };
 
-            var student = _mediator.Send(command);
+            var student = await _mediator.SendAsync(command);
 
             return student.Id;
         }

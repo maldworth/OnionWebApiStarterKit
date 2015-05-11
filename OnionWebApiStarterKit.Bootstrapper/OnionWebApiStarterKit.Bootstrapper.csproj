@@ -59,6 +59,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MediatR, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MediatR.2.0.0-beta-001\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+Xamarin.iOS10+MonoTouch10\MediatR.dll</HintPath>
@@ -184,6 +187,10 @@
     <ProjectReference Include="..\OnionWebApiStarterKit.Data\OnionWebApiStarterKit.Data.csproj">
       <Project>{5dea08dc-0561-4500-a273-6648d4ed046d}</Project>
       <Name>OnionWebApiStarterKit.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnionWebApiStarterKit.Logging\OnionWebApiStarterKit.Logging.csproj">
+      <Project>{53e71851-ee57-46b1-97e3-cb0933aa4b47}</Project>
+      <Name>OnionWebApiStarterKit.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\OnionWebApiStarterKit.MyWebApi\OnionWebApiStarterKit.MyWebApi.csproj">
       <Project>{bbdcb78b-8147-4182-8d78-5d6bcab5fddf}</Project>

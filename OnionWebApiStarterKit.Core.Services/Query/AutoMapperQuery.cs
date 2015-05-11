@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using OnionWebApiStarterKit.Core.Services;
+using OnionWebApiStarterKit.Core.Services.Abstracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,11 @@ using System.Linq.Expressions;
 
 namespace OnionWebApiStarterKit.Core.Services.Query
 {
-    public class AutoMapperQuery<TSrcEntity, TDestModel> : IRequest<IEnumerable<TDestModel>>, IFilterQuery<TSrcEntity>, IOrderByQuery<TDestModel>, ITakeQuery
+    public class AutoMapperQuery<TSrcEntity, TDestModel>
+        : BaseRequest, IRequest<IEnumerable<TDestModel>>,
+        IFilterQuery<TSrcEntity>,
+        IOrderByQuery<TDestModel>,
+        ITakeQuery
         where TSrcEntity : class
     {
         public const int PAGE_SIZE_MIN = 1;

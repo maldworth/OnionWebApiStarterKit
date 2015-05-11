@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FB4D0029-37DB-44BE-964A-ECF60498D212}</ProjectGuid>
+    <ProjectGuid>{53E71851-EE57-46B1-97E3-CB0933AA4B47}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OnionWebApiStarterKit.Core.Services</RootNamespace>
-    <AssemblyName>OnionWebApiStarterKit.Core.Services</AssemblyName>
+    <RootNamespace>OnionWebApiStarterKit.Logging</RootNamespace>
+    <AssemblyName>OnionWebApiStarterKit.Logging</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -19,7 +19,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\OnionWebApiStarterKit.MyWebApi\bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -33,10 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="MediatR">
       <HintPath>..\packages\MediatR.2.0.0-beta-001\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+Xamarin.iOS10+MonoTouch10\MediatR.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -45,28 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command\CreateStudentCommand.cs" />
-    <Compile Include="Command\DropAllCoursesCommand.cs" />
-    <Compile Include="Decorators\IAsyncPreRequestHandler.cs" />
-    <Compile Include="Decorators\IPreRequestHandler.cs" />
-    <Compile Include="Dto\BestMarkInCourseDto.cs" />
-    <Compile Include="Extensions\QueryableExtensions.cs" />
-    <Compile Include="PaginatedList.cs" />
+    <Compile Include="AsyncLoggingHandler.cs" />
+    <Compile Include="LoggingHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueryableArguments\IFilterQuery.cs" />
-    <Compile Include="QueryableArguments\IIncludeQuery.cs" />
-    <Compile Include="QueryableArguments\IOrderByQuery.cs" />
-    <Compile Include="QueryableArguments\IPaginateQuery.cs" />
-    <Compile Include="QueryableArguments\ITakeQuery.cs" />
-    <Compile Include="Query\AsyncAutoMapperQuery.cs" />
-    <Compile Include="Query\AutoMapperQuery.cs" />
-    <Compile Include="Query\BestMarkInCourseQuery.cs" />
-    <Compile Include="Query\BestMarkQuery.cs" />
-    <Compile Include="Query\AsyncGenericQuery.cs" />
-    <Compile Include="Query\GenericQuery.cs" />
-    <Compile Include="Query\AsyncPaginateQuery.cs" />
-    <Compile Include="Query\PaginateQuery.cs" />
-    <Compile Include="Abstracts\BaseRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -75,6 +60,10 @@
     <ProjectReference Include="..\OnionWebApiStarterKit.Core.DomainModels\OnionWebApiStarterKit.Core.DomainModels.csproj">
       <Project>{1550edcb-2aa0-4618-8cde-e2f2a09bcf74}</Project>
       <Name>OnionWebApiStarterKit.Core.DomainModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OnionWebApiStarterKit.Core.Services\OnionWebApiStarterKit.Core.Services.csproj">
+      <Project>{fb4d0029-37db-44be-964a-ecf60498d212}</Project>
+      <Name>OnionWebApiStarterKit.Core.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

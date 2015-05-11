@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using OnionWebApiStarterKit.Core.Services.Abstracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,11 @@ using System.Linq.Expressions;
 
 namespace OnionWebApiStarterKit.Core.Services.Query
 {
-    public class AsyncPaginateQuery<TEntity> : IAsyncRequest<PaginatedList<TEntity>>, IPaginateQuery<TEntity>, IFilterQuery<TEntity>, IIncludeQuery<TEntity>
+    public class AsyncPaginateQuery<TEntity>
+        : BaseRequest, IAsyncRequest<PaginatedList<TEntity>>,
+        IPaginateQuery<TEntity>,
+        IFilterQuery<TEntity>,
+        IIncludeQuery<TEntity>
         where TEntity : class
     {
         public const int PAGE_INDEX_DEFAULT = 1;

@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionWebApiStarterKit.Core.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionWebApiStarterKit.Core.Services", "OnionWebApiStarterKit.Core.Services\OnionWebApiStarterKit.Core.Services.csproj", "{FB4D0029-37DB-44BE-964A-ECF60498D212}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnionWebApiStarterKit.Logging", "OnionWebApiStarterKit.Logging\OnionWebApiStarterKit.Logging.csproj", "{53E71851-EE57-46B1-97E3-CB0933AA4B47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,6 +60,10 @@ Global
 		{FB4D0029-37DB-44BE-964A-ECF60498D212}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB4D0029-37DB-44BE-964A-ECF60498D212}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB4D0029-37DB-44BE-964A-ECF60498D212}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53E71851-EE57-46B1-97E3-CB0933AA4B47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E71851-EE57-46B1-97E3-CB0933AA4B47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E71851-EE57-46B1-97E3-CB0933AA4B47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E71851-EE57-46B1-97E3-CB0933AA4B47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -69,5 +75,6 @@ Global
 		{BBDCB78B-8147-4182-8D78-5D6BCAB5FDDF} = {865F2A44-8D9E-4D2E-A485-2C659CD7659B}
 		{1550EDCB-2AA0-4618-8CDE-E2F2A09BCF74} = {B3AEA5F1-35F8-4078-B4D0-652DCEFAE7A1}
 		{FB4D0029-37DB-44BE-964A-ECF60498D212} = {B3AEA5F1-35F8-4078-B4D0-652DCEFAE7A1}
+		{53E71851-EE57-46B1-97E3-CB0933AA4B47} = {7F7F0BEB-5815-4C94-AD9D-EF67F7955F11}
 	EndGlobalSection
 EndGlobal

@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Mehdime.Entity;
+using OnionWebApiStarterKit.Core.Services.Abstracts;
 using OnionWebApiStarterKit.Core.Services.Decorators;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ namespace OnionWebApiStarterKit.Services
 {
     public class AsyncMediatorPipeline<TRequest, TResponse>
     : IAsyncRequestHandler<TRequest, TResponse>
-    where TRequest : IAsyncRequest<TResponse>
+    where TRequest : BaseRequest, IAsyncRequest<TResponse>
     {
         private readonly IDbContextScopeFactory _dbContextScopeFactory;
         private readonly IAsyncRequestHandler<TRequest, TResponse> _inner;
