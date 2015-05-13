@@ -29,10 +29,9 @@ namespace OnionWebApiStarterKit.Bootstrapper
 
             builder.RegisterApiControllers(typeof(WebApiApplication).Assembly);
 
-            // This is used by odata endpoint, not the webapi endpoint
-            builder.RegisterType<SchoolDbContext>().As<ISchoolDbContext>().InstancePerRequest();
-            
             builder.RegisterType<DbContextScopeFactory>().As<IDbContextScopeFactory>().SingleInstance();
+
+            builder.RegisterType<AmbientDbContextLocator>().As<IAmbientDbContextLocator>().SingleInstance();
             
             // Registers our IMediator (abstraction for observer pattern, which lets us use CQRS)
             builder.RegisterModule(new MediatorModule(Assembly.Load("OnionWebApiStarterKit.Services")));

@@ -9,6 +9,7 @@ using OnionWebApiStarterKit.Services;
 using OnionWebApiStarterKit.Core.Services;
 using OnionWebApiStarterKit.Core.Services.Decorators;
 using OnionWebApiStarterKit.Core.Services.Query;
+using OnionWebApiStarterKit.Services.Procedures;
 
 namespace OnionWebApiStarterKit.Bootstrapper
 {
@@ -26,6 +27,11 @@ namespace OnionWebApiStarterKit.Bootstrapper
         {
             builder.RegisterSource(new ContravariantRegistrationSource());
             builder.RegisterAssemblyTypes(typeof(IMediator).Assembly).AsImplementedInterfaces();
+
+            // Register our Procedures
+            builder.RegisterAssemblyTypes(_assembliesToScan)
+                .AsClosedTypesOf(typeof(BaseProcedure<>))
+                .InstancePerDependency();
 
             // Request/Response for Query
             builder.RegisterAssemblyTypes(_assembliesToScan)

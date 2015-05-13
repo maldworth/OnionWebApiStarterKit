@@ -5,7 +5,7 @@ using System.Web;
 
 namespace OnionWebApiStarterKit.MyWebApi.ViewModels
 {
-    public class CreateStudentViewModel
+    public class CreateOrUpdateStudentViewModel
     {
         public string LastName { get; set; }
         public string FirstMidName { get; set; }

@@ -70,10 +70,13 @@
     <Compile Include="BaseQuery\BaseGenericQueryHandler.cs" />
     <Compile Include="BaseQuery\BaseAsyncPaginateQueryHandler.cs" />
     <Compile Include="BaseQuery\BasePaginateQueryHandler.cs" />
+    <Compile Include="Command\UpdateStudentCommandHandler.cs" />
     <Compile Include="Command\CreateStudentCommandHandler.cs" />
     <Compile Include="AsyncMediatorPipeline.cs" />
     <Compile Include="MediatorPipeline.cs" />
     <Compile Include="PreRequest\StudentSameNameCheck.cs" />
+    <Compile Include="Procedures\BaseProcedure.cs" />
+    <Compile Include="Procedures\DoesStudentFirstMidLastNameAlreadyExist.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Command\DropAllCoursesCommandHandler.cs" />
     <Compile Include="Query\AsyncAutoMapperQueryHandler.cs" />

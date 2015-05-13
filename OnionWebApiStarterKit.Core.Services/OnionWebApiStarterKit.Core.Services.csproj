@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command\UpdateStudentCommand.cs" />
     <Compile Include="Command\CreateStudentCommand.cs" />
     <Compile Include="Command\DropAllCoursesCommand.cs" />
     <Compile Include="Decorators\IAsyncPreRequestHandler.cs" />

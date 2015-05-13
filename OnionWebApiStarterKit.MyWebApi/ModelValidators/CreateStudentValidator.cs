@@ -7,7 +7,7 @@ namespace OnionWebApiStarterKit.MyWebApi.ModelValidators
     /// <summary>
     /// We can also validate against our ViewModels
     /// </summary>
-    public class CreateStudentValidator : AbstractValidator<CreateStudentViewModel>
+    public class CreateStudentValidator : AbstractValidator<CreateOrUpdateStudentViewModel>
     {
         public CreateStudentValidator()
         {

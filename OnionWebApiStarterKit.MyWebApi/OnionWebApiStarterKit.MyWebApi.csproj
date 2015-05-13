@@ -111,7 +111,7 @@
     <Compile Include="ModelValidators\CreateStudentValidator.cs" />
     <Compile Include="ModelValidators\StudentValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\CreateStudentViewModel.cs" />
+    <Compile Include="ViewModels\CreateOrUpdateStudentViewModel.cs" />
     <Compile Include="ViewModels\StudentCourseListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

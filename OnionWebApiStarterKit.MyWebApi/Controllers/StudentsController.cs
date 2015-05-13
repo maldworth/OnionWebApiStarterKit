@@ -51,7 +51,7 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
         // But depending on your implementation, your service might allow more configurations, or it could be an "CreateOrUpdate" service, and so you would want to do some preliminary validation
         // here before calling the service. So really I'm just trying to show all potential ways to use these features. Your project architecture, complexity and code style/conventions might
         // favor one more than the other, but the building blocks are here.
-        public async Task<dynamic> Post([FromBody]CreateStudentViewModel model)
+        public async Task<dynamic> Post([FromBody]CreateOrUpdateStudentViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -68,6 +68,26 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
             var student = await _mediator.SendAsync(command);
 
             return student.Id;
+        }
+
+        public async Task<dynamic> Put(int id, [FromBody]CreateOrUpdateStudentViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var command = new UpdateStudentCommand
+            {
+                Id = id,
+                FirstMidName = model.FirstMidName,
+                LastName = model.LastName,
+                EnrollmentDate = model.EnrollmentDate
+            };
+
+            var student = await _mediator.SendAsync(command);
+
+            return Json(student);
         }
 
         //public void Put(int id, [FromBody]string value)
