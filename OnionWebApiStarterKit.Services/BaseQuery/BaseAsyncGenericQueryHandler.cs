@@ -12,7 +12,8 @@ using OnionWebApiStarterKit.Data;
 
 namespace OnionWebApiStarterKit.Services.BaseQuery
 {
-    public abstract class BaseAsyncGenericQueryHandler<TEntity, TDbContext> : IAsyncRequestHandler<AsyncGenericQuery<TEntity>, IEnumerable<TEntity>>
+    public abstract class BaseAsyncGenericQueryHandler<TEntity, TDbContext>
+        : IAsyncRequestHandler<AsyncGenericQuery<TEntity>, IEnumerable<TEntity>>
         where TEntity : class
         where TDbContext : class, IDbContext
     {
@@ -20,9 +21,6 @@ namespace OnionWebApiStarterKit.Services.BaseQuery
 
         public BaseAsyncGenericQueryHandler(IDbContextScopeFactory dbContextScopeFactory)
         {
-            if (dbContextScopeFactory == null)
-                throw new ArgumentNullException("dbContextScopeFactory");
-
             _dbContextScopeFactory = dbContextScopeFactory;
         }
 

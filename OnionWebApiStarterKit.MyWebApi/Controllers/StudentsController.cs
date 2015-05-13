@@ -94,8 +94,18 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
         //{
         //}
 
-        //public void Delete(int id)
-        //{
-        //}
+        // Normally this would signify deleting a student, and we would make a route attribute for DropAllCourses, but for the sake of this example, we are hijacking
+        // this functionality, and making it use the drop all courses
+        public dynamic Delete(int id)
+        {
+            var command = new DropAllCoursesCommand
+            {
+                StudentId = id
+            };
+
+            _mediator.Send(command);
+
+            return Ok();
+        }
     }
 }

@@ -9,18 +9,16 @@ using System.Collections.Generic;
 using AutoMapper.QueryableExtensions;
 using OnionWebApiStarterKit.Core.Services.Command;
 using OnionWebApiStarterKit.Data;
+using OnionWebApiStarterKit.Core.Services;
 
 namespace OnionWebApiStarterKit.Services.Command
 {
-    public class DropAllCoursesCommandHandler : RequestHandler<DropAllCoursesCommand>
+    public class DropAllCoursesCommandHandler : RequestHandler<DropAllCoursesCommand>, IDatabaseService
     {
         private readonly IDbContextScopeFactory _dbContextScopeFactory;
 
         public DropAllCoursesCommandHandler(IDbContextScopeFactory dbContextScopeFactory)
         {
-            if (dbContextScopeFactory == null)
-                throw new ArgumentNullException("dbContextScopeFactory");
-
             _dbContextScopeFactory = dbContextScopeFactory;
         }
 

@@ -52,6 +52,8 @@
     <Compile Include="Decorators\IPreRequestHandler.cs" />
     <Compile Include="Dto\BestMarkInCourseDto.cs" />
     <Compile Include="Extensions\QueryableExtensions.cs" />
+    <Compile Include="IDatabaseService.cs" />
+    <Compile Include="IProcedure.cs" />
     <Compile Include="PaginatedList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueryableArguments\IFilterQuery.cs" />

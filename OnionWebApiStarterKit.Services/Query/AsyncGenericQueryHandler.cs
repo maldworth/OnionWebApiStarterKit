@@ -1,6 +1,7 @@
 ﻿using Mehdime.Entity;
 using OnionWebApiStarterKit.Services.BaseQuery;
 using OnionWebApiStarterKit.Data;
+using OnionWebApiStarterKit.Core.Services;
 
 namespace OnionWebApiStarterKit.Services.Query
 {

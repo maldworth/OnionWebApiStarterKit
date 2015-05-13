@@ -13,7 +13,8 @@ using System.Threading.Tasks;
 
 namespace OnionWebApiStarterKit.Services.Query
 {
-    public abstract class BaseAsyncAutoMapperQueryHandler<TSrcEntity, TDestModel, TDbContext> : IAsyncRequestHandler<AsyncAutoMapperQuery<TSrcEntity, TDestModel>, IEnumerable<TDestModel>>
+    public abstract class BaseAsyncAutoMapperQueryHandler<TSrcEntity, TDestModel, TDbContext>
+        : IAsyncRequestHandler<AsyncAutoMapperQuery<TSrcEntity, TDestModel>, IEnumerable<TDestModel>>
         where TSrcEntity : class
         where TDbContext : class, IDbContext
     {
@@ -21,9 +22,6 @@ namespace OnionWebApiStarterKit.Services.Query
 
         public BaseAsyncAutoMapperQueryHandler(IDbContextScopeFactory dbContextScopeFactory)
         {
-            if (dbContextScopeFactory == null)
-                throw new ArgumentNullException("dbContextScopeFactory");
-
             _dbContextScopeFactory = dbContextScopeFactory;
         }
 

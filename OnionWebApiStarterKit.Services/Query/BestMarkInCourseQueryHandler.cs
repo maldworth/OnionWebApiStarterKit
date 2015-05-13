@@ -9,6 +9,7 @@ using OnionWebApiStarterKit.Core.Dto;
 using AutoMapper.QueryableExtensions;
 using OnionWebApiStarterKit.Core.Services.Query;
 using OnionWebApiStarterKit.Data;
+using OnionWebApiStarterKit.Core.Services;
 
 namespace OnionWebApiStarterKit.Services.Query
 {

@@ -10,18 +10,16 @@ using AutoMapper.QueryableExtensions;
 using OnionWebApiStarterKit.Core.Services.Command;
 using OnionWebApiStarterKit.Data;
 using System.Threading.Tasks;
+using OnionWebApiStarterKit.Core.Services;
 
 namespace OnionWebApiStarterKit.Services.Command
 {
-    public class CreateStudentCommandHandler : IAsyncRequestHandler<CreateStudentCommand, Student>
+    public class CreateStudentCommandHandler : IDatabaseService, IAsyncRequestHandler<CreateStudentCommand, Student>
     {
         private readonly IDbContextScopeFactory _dbContextScopeFactory;
 
         public CreateStudentCommandHandler(IDbContextScopeFactory dbContextScopeFactory)
         {
-            if (dbContextScopeFactory == null)
-                throw new ArgumentNullException("dbContextScopeFactory");
-
             _dbContextScopeFactory = dbContextScopeFactory;
         }
 

@@ -8,6 +8,7 @@ using OnionWebApiStarterKit.Core.DomainModels;
 using System.Data.Entity;
 using OnionWebApiStarterKit.Core.Services.Query;
 using OnionWebApiStarterKit.Data;
+using OnionWebApiStarterKit.Core.Services;
 
 namespace OnionWebApiStarterKit.Services.Query
 {

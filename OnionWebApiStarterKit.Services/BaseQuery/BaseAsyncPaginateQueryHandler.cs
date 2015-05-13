@@ -13,7 +13,8 @@ using System.Threading.Tasks;
 
 namespace OnionWebApiStarterKit.Services.BaseQuery
 {
-    public abstract class BaseAsyncPaginateQueryHandler<TEntity, TDbContext> : IAsyncRequestHandler<AsyncPaginateQuery<TEntity>, PaginatedList<TEntity>>
+    public abstract class BaseAsyncPaginateQueryHandler<TEntity, TDbContext>
+        : IAsyncRequestHandler<AsyncPaginateQuery<TEntity>, PaginatedList<TEntity>>
         where TEntity : class
         where TDbContext : class, IDbContext
     {
@@ -21,9 +22,6 @@ namespace OnionWebApiStarterKit.Services.BaseQuery
 
         public BaseAsyncPaginateQueryHandler(IDbContextScopeFactory dbContextScopeFactory)
         {
-            if (dbContextScopeFactory == null)
-                throw new ArgumentNullException("dbContextScopeFactory");
-
             _dbContextScopeFactory = dbContextScopeFactory;
         }
 

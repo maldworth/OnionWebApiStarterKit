@@ -12,7 +12,8 @@ using OnionWebApiStarterKit.Data;
 
 namespace OnionWebApiStarterKit.Services.BaseQuery
 {
-    public abstract class BasePaginateQueryHandler<TEntity, TDbContext> : IRequestHandler<PaginateQuery<TEntity>, PaginatedList<TEntity>>
+    public abstract class BasePaginateQueryHandler<TEntity, TDbContext>
+        : IRequestHandler<PaginateQuery<TEntity>, PaginatedList<TEntity>>
         where TEntity : class
         where TDbContext : class, IDbContext
     {
@@ -20,9 +21,6 @@ namespace OnionWebApiStarterKit.Services.BaseQuery
 
         public BasePaginateQueryHandler(IDbContextScopeFactory dbContextScopeFactory)
         {
-            if (dbContextScopeFactory == null)
-                throw new ArgumentNullException("dbContextScopeFactory");
-
             _dbContextScopeFactory = dbContextScopeFactory;
         }
 

@@ -12,7 +12,8 @@ using OnionWebApiStarterKit.Data;
 
 namespace OnionWebApiStarterKit.Services.Query
 {
-    public abstract class BaseAutoMapperQueryHandler<TSrcEntity, TDestModel, TDbContext> : IRequestHandler<AutoMapperQuery<TSrcEntity, TDestModel>, IEnumerable<TDestModel>>
+    public abstract class BaseAutoMapperQueryHandler<TSrcEntity, TDestModel, TDbContext>
+        : IRequestHandler<AutoMapperQuery<TSrcEntity, TDestModel>, IEnumerable<TDestModel>>
         where TSrcEntity : class
         where TDbContext : class, IDbContext
     {
@@ -20,9 +21,6 @@ namespace OnionWebApiStarterKit.Services.Query
 
         public BaseAutoMapperQueryHandler(IDbContextScopeFactory dbContextScopeFactory)
         {
-            if (dbContextScopeFactory == null)
-                throw new ArgumentNullException("dbContextScopeFactory");
-
             _dbContextScopeFactory = dbContextScopeFactory;
         }
 

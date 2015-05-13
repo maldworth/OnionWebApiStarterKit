@@ -9,7 +9,7 @@ using OnionWebApiStarterKit.Services;
 using OnionWebApiStarterKit.Core.Services;
 using OnionWebApiStarterKit.Core.Services.Decorators;
 using OnionWebApiStarterKit.Core.Services.Query;
-using OnionWebApiStarterKit.Services.Procedures;
+using System.Linq;
 
 namespace OnionWebApiStarterKit.Bootstrapper
 {
@@ -30,26 +30,9 @@ namespace OnionWebApiStarterKit.Bootstrapper
 
             // Register our Procedures
             builder.RegisterAssemblyTypes(_assembliesToScan)
-                .AsClosedTypesOf(typeof(BaseProcedure<>))
+                .Where(t => t.GetInterfaces().Any(i => i == typeof(IProcedure)))
+                .AsSelf()
                 .InstancePerDependency();
-
-            // Request/Response for Query
-            builder.RegisterAssemblyTypes(_assembliesToScan)
-                .AsClosedTypesOf(typeof(IRequestHandler<,>), "service-handlers")
-                .SingleInstance();
-
-            builder.RegisterAssemblyTypes(_assembliesToScan)
-                .AsClosedTypesOf(typeof(IAsyncRequestHandler<,>), "async-service-handlers")
-                .SingleInstance();
-
-            // Request/void Response for Commands
-            builder.RegisterAssemblyTypes(_assembliesToScan)
-                .AsClosedTypesOf(typeof(RequestHandler<>))
-                .SingleInstance();
-
-            builder.RegisterAssemblyTypes(_assembliesToScan)
-                .AsClosedTypesOf(typeof(AsyncRequestHandler<>))
-                .SingleInstance();
 
             // Register our PreRequestHandler
             builder.RegisterAssemblyTypes(_assembliesToScan)
@@ -60,50 +43,62 @@ namespace OnionWebApiStarterKit.Bootstrapper
                 .AsClosedTypesOf(typeof(IAsyncPreRequestHandler<>))
                 .SingleInstance();
 
-            // Decorate All Services with our Pipeline
-            builder.RegisterGenericDecorator(typeof(MediatorPipeline<,>), typeof(IRequestHandler<,>), fromKey: "service-handlers", toKey: "pipeline-handlers");
-            builder.RegisterGenericDecorator(typeof(AsyncMediatorPipeline<,>), typeof(IAsyncRequestHandler<,>), fromKey: "async-service-handlers", toKey: "async-pipeline-handlers");
+            // Registers all of our commands and queries that have the IDatabaseService marker
+            // If we want to make services that perhaps talk to external API's without any DB interactions, then we would leave out the DbContextScopeBoundary
+            builder.ScanRegisterAndDecorate(
+                _assembliesToScan,
+                typeof(IDatabaseService),
+                typeof(IAsyncRequestHandler<,>),
+                typeof(AsyncMediatorPipeline<,>),
+                typeof(AsyncDbContextScopeBoundary<,>),
+                typeof(AsyncValidatorHandler<,>),
+                typeof(AsyncLoggingHandler<,>)
+                );
 
-            // Decorate All Pipelines with our Validator
-            builder.RegisterGenericDecorator(typeof(ValidatorHandler<,>), typeof(IRequestHandler<,>), fromKey: "pipeline-handlers", toKey: "validator-handlers");
-            builder.RegisterGenericDecorator(typeof(AsyncValidatorHandler<,>), typeof(IAsyncRequestHandler<,>), fromKey: "async-pipeline-handlers", toKey: "async-validator-handlers");
+            builder.ScanRegisterAndDecorate(
+                _assembliesToScan,
+                typeof(IDatabaseService),
+                typeof(IRequestHandler<,>),
+                typeof(MediatorPipeline<,>),
+                typeof(DbContextScopeBoundary<,>),
+                typeof(ValidatorHandler<,>),
+                typeof(LoggingHandler<,>)
+                );
 
-            // Decorate All Validators with our Logging Handler
-            builder.RegisterGenericDecorator(typeof(LoggingHandler<,>), typeof(IRequestHandler<,>), fromKey: "validator-handlers");    // The outermost decorator should not have a toKey
-            builder.RegisterGenericDecorator(typeof(AsyncLoggingHandler<,>), typeof(IAsyncRequestHandler<,>), fromKey: "async-validator-handlers");    // The outermost decorator should not have a toKey
-
+            #region Generic Helper Query Services
             // Special registration of our Automapper Handler
             builder.RegisterGeneric(typeof(AutoMapperQuery<,>)).AsSelf();
             builder.RegisterGeneric(typeof(AutoMapperQueryHandler<,>))
-                .Named("service-handlers", typeof(IRequestHandler<,>)) // Because these are missed in the scan above, we have to manually name them for decoration
+                .As(typeof(IRequestHandler<,>))
                 .SingleInstance();
 
             builder.RegisterGeneric(typeof(AsyncAutoMapperQuery<,>)).AsSelf();
             builder.RegisterGeneric(typeof(AsyncAutoMapperQueryHandler<,>))
-                .Named("async-service-handlers", typeof(IAsyncRequestHandler<,>)) // Because these are missed in the scan above, we have to manually name them for decoration
+                .As(typeof(IAsyncRequestHandler<,>))
                 .SingleInstance();
 
             // Special Registration of our Generic Query Handler
             builder.RegisterGeneric(typeof(GenericQuery<>)).AsSelf();
             builder.RegisterGeneric(typeof(GenericQueryHandler<>))
-                .Named("service-handlers", typeof(IRequestHandler<,>)) // Because these are missed in the scan above, we have to manually name them for decoration
+                .As(typeof(IRequestHandler<,>))
                 .SingleInstance();
 
             builder.RegisterGeneric(typeof(AsyncGenericQuery<>)).AsSelf();
             builder.RegisterGeneric(typeof(AsyncGenericQueryHandler<>))
-                .Named("async-service-handlers", typeof(IAsyncRequestHandler<,>)) // Because these are missed in the scan above, we have to manually name them for decoration
+                .As(typeof(IAsyncRequestHandler<,>))
                 .SingleInstance();
 
             // Special Registration of our Pagination Query Handler
             builder.RegisterGeneric(typeof(PaginateQuery<>)).AsSelf();
             builder.RegisterGeneric(typeof(PaginateQueryHandler<>))
-                .Named("service-handlers", typeof(IRequestHandler<,>)) // Because these are missed in the scan above, we have to manually name them for decoration
+                .As(typeof(IRequestHandler<,>))
                 .SingleInstance();
 
             builder.RegisterGeneric(typeof(AsyncPaginateQuery<>)).AsSelf();
             builder.RegisterGeneric(typeof(AsyncPaginateQueryHandler<>))
-                .Named("async-service-handlers", typeof(IAsyncRequestHandler<,>)) // Because these are missed in the scan above, we have to manually name them for decoration
+                .As(typeof(IAsyncRequestHandler<,>))
                 .SingleInstance();
+            #endregion
 
             // Sets the delegate resolver factories for Mediatr.
             // These factories are used by Mediatr to find the appropriate Handlers

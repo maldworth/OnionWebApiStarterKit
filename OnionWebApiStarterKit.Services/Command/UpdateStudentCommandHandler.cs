@@ -11,21 +11,18 @@ using OnionWebApiStarterKit.Core.Services.Command;
 using OnionWebApiStarterKit.Data;
 using System.Threading.Tasks;
 using OnionWebApiStarterKit.Services.Procedures;
+using OnionWebApiStarterKit.Core.Services;
 
 namespace OnionWebApiStarterKit.Services.Command
 {
-    public class UpdateStudentCommandHandler : IAsyncRequestHandler<UpdateStudentCommand, Student>
+    public class UpdateStudentCommandHandler : IDatabaseService, IAsyncRequestHandler<UpdateStudentCommand, Student>
     {
         private readonly IDbContextScopeFactory _dbContextScopeFactory;
         private readonly DoesStudentFirstMidLastNameAlreadyExist _studentNameExistsProcedure;
 
         public UpdateStudentCommandHandler(IDbContextScopeFactory dbContextScopeFactory, DoesStudentFirstMidLastNameAlreadyExist studentNameExistsProcedure)
         {
-            if (dbContextScopeFactory == null)
-                throw new ArgumentNullException("dbContextScopeFactory");
-
             _dbContextScopeFactory = dbContextScopeFactory;
-
             _studentNameExistsProcedure = studentNameExistsProcedure;
         }
 
