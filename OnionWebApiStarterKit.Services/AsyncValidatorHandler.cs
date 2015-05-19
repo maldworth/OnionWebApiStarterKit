@@ -15,7 +15,6 @@ namespace OnionWebApiStarterKit.Services
     {
         private readonly IAsyncRequestHandler<TRequest, TResponse> _inner;
         private readonly IValidator<TRequest>[] _validators;
-        private readonly ILog _log;
 
         public AsyncValidatorHandler(
             IAsyncRequestHandler<TRequest, TResponse> inner,
@@ -23,13 +22,10 @@ namespace OnionWebApiStarterKit.Services
         {
             _inner = inner;
             _validators = validators;
-            _log = LogProvider.For<AsyncValidatorHandler<TRequest, TResponse>>();
         }
 
         public async Task<TResponse> Handle(TRequest request)
         {
-            _log.Trace(() => "Start");
-
             var context = new ValidationContext(request);
 
             var failures = _validators

@@ -105,6 +105,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="AutoMapperProfiles\AutoMapperProfile.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
+    <Compile Include="Filters\FluentValidationActionFilter.cs" />
+    <Compile Include="Filters\ServiceExceptionFilterAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

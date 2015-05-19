@@ -70,6 +70,9 @@
     <Compile Include="Query\AsyncPaginateQuery.cs" />
     <Compile Include="Query\PaginateQuery.cs" />
     <Compile Include="Abstracts\BaseRequest.cs" />
+    <Compile Include="UnrecoverableException.cs" />
+    <Compile Include="ServiceException.cs" />
+    <Compile Include="RecoverableException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -25,7 +25,7 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
             _mediator = mediator;
         }
 
-        public async System.Threading.Tasks.Task<IEnumerable<Student>> Get()
+        public async Task<IEnumerable<Student>> Get()
         {
             // Example of calling the paginated result
             //var pagedStudents = _mediator.Send(new PaginateQuery<Student>(2,3,orderBy: x=>x.OrderBy(c=>c.LastName)));
@@ -37,7 +37,7 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
         }
 
         // I know this method is supposed to return the student's details, but I've just chosen to use this as an example of comparing the broad service AutoMapperQuery versus the specific BestMarkInCourse, and both achieve the same result albeit differently.
-        public dynamic Get(int id)
+        public BestMarkInCourseDto Get(int id)
         {
             // This query is almost identical to our BestMarkInCourse that we used in the odata function, but there's one difference. This result will return an ienumerable of 1 (by using the .Take(pageSize)), then calls FirstOrDefault
             // Versus, the BestMarkInCourseHandler, which actually calls the FirstOrDefault to trigger the DB Query.
@@ -51,13 +51,8 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
         // But depending on your implementation, your service might allow more configurations, or it could be an "CreateOrUpdate" service, and so you would want to do some preliminary validation
         // here before calling the service. So really I'm just trying to show all potential ways to use these features. Your project architecture, complexity and code style/conventions might
         // favor one more than the other, but the building blocks are here.
-        public async Task<dynamic> Post([FromBody]CreateOrUpdateStudentViewModel model)
+        public async Task<int> Post([FromBody]CreateOrUpdateStudentViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var command = new CreateStudentCommand
             {
                 FirstMidName = model.FirstMidName,
@@ -70,13 +65,8 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
             return student.Id;
         }
 
-        public async Task<dynamic> Put(int id, [FromBody]CreateOrUpdateStudentViewModel model)
+        public async Task<Student> Put(int id, [FromBody]CreateOrUpdateStudentViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             var command = new UpdateStudentCommand
             {
                 Id = id,
@@ -87,7 +77,7 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
 
             var student = await _mediator.SendAsync(command);
 
-            return Json(student);
+            return student;
         }
 
         //public void Put(int id, [FromBody]string value)
@@ -96,7 +86,7 @@ namespace OnionWebApiStarterKit.MyWebApi.Controllers.api
 
         // Normally this would signify deleting a student, and we would make a route attribute for DropAllCourses, but for the sake of this example, we are hijacking
         // this functionality, and making it use the drop all courses
-        public dynamic Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
             var command = new DropAllCoursesCommand
             {

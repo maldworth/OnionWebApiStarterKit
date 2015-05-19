@@ -76,6 +76,8 @@
     <Compile Include="Command\CreateStudentCommandHandler.cs" />
     <Compile Include="AsyncMediatorPipeline.cs" />
     <Compile Include="DbContextScopeBoundary.cs" />
+    <Compile Include="ExceptionLoggerAsync.cs" />
+    <Compile Include="ExceptionLogger.cs" />
     <Compile Include="MediatorPipeline.cs" />
     <Compile Include="PreRequest\StudentSameNameCheck.cs" />
     <Compile Include="Procedures\DoesStudentFirstMidLastNameAlreadyExist.cs" />

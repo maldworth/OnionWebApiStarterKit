@@ -33,7 +33,7 @@ namespace OnionWebApiStarterKit.Services.Command
                 var enrollments = dbCtx.Enrollments.Where(x => x.StudentId == command.StudentId).ToList();
                 if(enrollments == null || enrollments.Count <= 0)
                 {
-                    throw new InvalidOperationException("No Enrollments found to drop.");
+                    throw new UnrecoverableException("No Enrollments found to drop.");
                 }
 
                 dbCtx.Enrollments.RemoveRange(enrollments);

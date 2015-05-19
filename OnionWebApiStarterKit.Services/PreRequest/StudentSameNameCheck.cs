@@ -9,6 +9,7 @@ using OnionWebApiStarterKit.Services.Logging;
 using System.Data.Entity;
 using OnionWebApiStarterKit.Services.Procedures;
 using OnionWebApiStarterKit.Services.Abstracts;
+using OnionWebApiStarterKit.Core.Services;
 
 namespace OnionWebApiStarterKit.Services.PreRequest
 {
@@ -24,12 +25,9 @@ namespace OnionWebApiStarterKit.Services.PreRequest
 
         public async Task Handle(CreateStudentCommand request)
         {
-            var logger = LogProvider.For<StudentSameNameCheck>();
-            logger.Debug("Start");
-            
             // Find if Student with same firstmid and last name already exists
             if (await _studentExistProcedure.HandleAsync<ISchoolDbContext>(request.FirstMidName, request.LastName))
-                throw new InvalidOperationException("A Student with that last and firstmid name already exists");
+                throw new RecoverableException("A Student with that last and firstmid name already exists");
         }
     }
 }

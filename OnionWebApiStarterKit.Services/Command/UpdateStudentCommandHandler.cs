@@ -40,7 +40,7 @@ namespace OnionWebApiStarterKit.Services.Command
                 {
                     // Check if the new first and last names are already taken
                     if (await _studentNameExistsProcedure.HandleAsync<ISchoolDbContext>(command.FirstMidName, command.LastName))
-                        throw new ArgumentException("Student FirstMid and LastName Already Exists");
+                        throw new RecoverableException("Student FirstMid and LastName Already Exists");
 
                     currentStudent.FirstMidName = command.FirstMidName;
                     currentStudent.LastName = command.LastName;

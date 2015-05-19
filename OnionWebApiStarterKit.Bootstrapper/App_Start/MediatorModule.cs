@@ -52,6 +52,7 @@ namespace OnionWebApiStarterKit.Bootstrapper
                 typeof(AsyncMediatorPipeline<,>),
                 typeof(AsyncDbContextScopeBoundary<,>),
                 typeof(AsyncValidatorHandler<,>),
+                typeof(ExceptionLoggerAsync<,>),
                 typeof(AsyncLoggingHandler<,>)
                 );
 
@@ -62,6 +63,7 @@ namespace OnionWebApiStarterKit.Bootstrapper
                 typeof(MediatorPipeline<,>),
                 typeof(DbContextScopeBoundary<,>),
                 typeof(ValidatorHandler<,>),
+                typeof(ExceptionLogger<,>),
                 typeof(LoggingHandler<,>)
                 );
 
