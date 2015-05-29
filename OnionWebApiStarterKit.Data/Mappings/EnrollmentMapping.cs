@@ -22,12 +22,14 @@ namespace OnionWebApiStarterKit.Data.Mappings
 
             // Foreign Key
             this.HasRequired(x => x.Student)
-                .WithMany()
-                .HasForeignKey(x => x.StudentId);
+                .WithMany(x=>x.Enrollments)
+                .HasForeignKey(x => x.StudentId)
+                .WillCascadeOnDelete(false);
 
             this.HasRequired(x => x.Course)
-                .WithMany()
-                .HasForeignKey(x => x.CourseId);
+                .WithMany(x=>x.Enrollments)
+                .HasForeignKey(x => x.CourseId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

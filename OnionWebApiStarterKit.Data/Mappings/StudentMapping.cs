@@ -20,11 +20,6 @@ namespace OnionWebApiStarterKit.Data.Mappings
             this.Property(t => t.LastName)
                 .HasMaxLength(50)
                 .IsRequired();
-
-            // Navigation Property
-            this.HasMany(x => x.Enrollments)
-                .WithRequired(x=>x.Student)
-                .WillCascadeOnDelete(false);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using AutoMapper;
-using FluentValidation;
 
 namespace OnionWebApiStarterKit.Bootstrapper
 {
