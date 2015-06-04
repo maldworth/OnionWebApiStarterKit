@@ -38,8 +38,11 @@ namespace OnionWebApiStarterKit.Services.BaseQuery
                 entities = entities.Where(args);
                 entities = entities.OrderBy(args);
 
+                if (args.PageSize != 0)
+                    entities = entities.Take(args.PageSize);
+
                 // Depending on your needs, you may not want to have .Take be mandatory
-                return await entities.Take(args.PageSize).ToListAsync();
+                return await entities.ToListAsync();
             }
         }
     }

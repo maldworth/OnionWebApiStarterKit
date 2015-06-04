@@ -16,7 +16,6 @@ namespace OnionWebApiStarterKit.Core.Services.Query
         where TEntity : class
     {
         public const int PAGE_SIZE_MIN = 1;
-        public const int PAGE_SIZE_MAX = 100;
 
         public int PageSize { get; private set; }
         public Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> OrderBy { get; private set; }
@@ -24,13 +23,13 @@ namespace OnionWebApiStarterKit.Core.Services.Query
         public Expression<Func<TEntity, object>>[] IncludeProperties { get; private set; }
 
         public GenericQuery(
-            int pageSize,
+            int? pageSize = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             Expression<Func<TEntity, bool>> predicate = null,
             params Expression<Func<TEntity, object>>[] includeProperties
             )
         {
-            PageSize = Math.Min(Math.Max(pageSize, PAGE_SIZE_MIN), PAGE_SIZE_MAX);
+            PageSize = pageSize.HasValue ? Math.Max(pageSize.Value, PAGE_SIZE_MIN) : 0;
             OrderBy = orderBy;
             Predicate = predicate;
             IncludeProperties = includeProperties;

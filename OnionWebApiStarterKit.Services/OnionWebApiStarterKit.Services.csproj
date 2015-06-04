@@ -66,11 +66,11 @@
     <Compile Include="App_Packages\LibLog.4.2\LibLog.cs" />
     <Compile Include="AsyncDbContextScopeBoundary.cs" />
     <Compile Include="AutoMapperConfig\AutoMapperProfile.cs" />
-    <Compile Include="BaseQuery\BaseAsyncAutoMapperQueryHandler.cs" />
+    <Compile Include="BaseQuery\BaseAutoMapperQueryHandlerAsync.cs" />
     <Compile Include="BaseQuery\BaseAutoMapperQueryHandler.cs" />
-    <Compile Include="BaseQuery\BaseAsyncGenericQueryHandler.cs" />
+    <Compile Include="BaseQuery\BaseGenericQueryHandlerAsync.cs" />
     <Compile Include="BaseQuery\BaseGenericQueryHandler.cs" />
-    <Compile Include="BaseQuery\BaseAsyncPaginateQueryHandler.cs" />
+    <Compile Include="BaseQuery\BasePaginateQueryHandlerAsync.cs" />
     <Compile Include="BaseQuery\BasePaginateQueryHandler.cs" />
     <Compile Include="Command\UpdateStudentCommandHandler.cs" />
     <Compile Include="Command\CreateStudentCommandHandler.cs" />

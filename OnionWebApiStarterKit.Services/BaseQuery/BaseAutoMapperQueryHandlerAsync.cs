@@ -37,7 +37,9 @@ namespace OnionWebApiStarterKit.Services.Query
                 srcEntities = srcEntities.Where(args);
                 IQueryable<TDestModel> destEntities = srcEntities.Project().To<TDestModel>();
                 destEntities = destEntities.OrderBy(args);
-                return await destEntities.Take(args.PageSize).ToListAsync();
+                if (args.PageSize != 0)
+                    destEntities = destEntities.Take(args.PageSize);
+                return await destEntities.ToListAsync();
             }
         }
     }

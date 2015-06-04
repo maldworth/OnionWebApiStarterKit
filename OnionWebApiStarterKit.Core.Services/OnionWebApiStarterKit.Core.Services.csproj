@@ -61,13 +61,13 @@
     <Compile Include="QueryableArguments\IOrderByQuery.cs" />
     <Compile Include="QueryableArguments\IPaginateQuery.cs" />
     <Compile Include="QueryableArguments\ITakeQuery.cs" />
-    <Compile Include="Query\AsyncAutoMapperQuery.cs" />
+    <Compile Include="Query\AutoMapperQueryAsync.cs" />
     <Compile Include="Query\AutoMapperQuery.cs" />
     <Compile Include="Query\BestMarkInCourseQuery.cs" />
     <Compile Include="Query\BestMarkQuery.cs" />
-    <Compile Include="Query\AsyncGenericQuery.cs" />
+    <Compile Include="Query\GenericQueryAsync.cs" />
     <Compile Include="Query\GenericQuery.cs" />
-    <Compile Include="Query\AsyncPaginateQuery.cs" />
+    <Compile Include="Query\PaginateQueryAsync.cs" />
     <Compile Include="Query\PaginateQuery.cs" />
     <Compile Include="Abstracts\BaseRequest.cs" />
     <Compile Include="UnrecoverableException.cs" />
